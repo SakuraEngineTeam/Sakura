@@ -1,0 +1,12 @@
+{
+  "name": "sakura.frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/js/app.js",
+  "scripts": {},
+  "author": "Nina Lisitsinskaya <vvatashi4259@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.28.3"
+  }
+}
