@@ -46,6 +46,7 @@ namespace Sakura.Api
         app.UseDeveloperExceptionPage();
       }
 
+      app.UseStaticFiles();
       app.UseMvc();
     }
   }
