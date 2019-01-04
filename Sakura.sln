@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.Model", "Sakura.Mode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.App", "Sakura.App\Sakura.App.csproj", "{913F436E-105F-4BEB-8849-9C2C797181C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.App.Tests", "Sakura.App.Tests\Sakura.App.Tests.csproj", "{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,17 @@ Global
 		{913F436E-105F-4BEB-8849-9C2C797181C6}.Release|x64.Build.0 = Release|Any CPU
 		{913F436E-105F-4BEB-8849-9C2C797181C6}.Release|x86.ActiveCfg = Release|Any CPU
 		{913F436E-105F-4BEB-8849-9C2C797181C6}.Release|x86.Build.0 = Release|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Debug|x64.Build.0 = Debug|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Debug|x86.Build.0 = Debug|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Release|x64.ActiveCfg = Release|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Release|x64.Build.0 = Release|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Release|x86.ActiveCfg = Release|Any CPU
+		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

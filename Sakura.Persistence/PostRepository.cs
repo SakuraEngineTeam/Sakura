@@ -4,7 +4,17 @@ using Sakura.Model;
 
 namespace Sakura.Persistence
 {
-  public class PostRepository : IRepository<long, Post>
+  public interface IRepository<TKey, TModel>
+    where TKey : struct
+    where TModel : IModel<TKey>
+  {
+    TModel Get(TKey key);
+    TKey Save(TModel item);
+  }
+
+  public interface IPostRepository : IRepository<long, Post> { }
+
+  public class PostRepository : IPostRepository
   {
     protected readonly Context Context;
     protected readonly IMapper Mapper;

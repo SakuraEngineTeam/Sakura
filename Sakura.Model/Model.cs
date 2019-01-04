@@ -1,5 +1,11 @@
 namespace Sakura.Model
 {
+  public interface IModel<TKey>
+    where TKey : struct
+  {
+    TKey Id { get; }
+  }
+
   public abstract class Model<TKey> : IModel<TKey>
     where TKey : struct
   {

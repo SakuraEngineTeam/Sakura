@@ -15,12 +15,10 @@ namespace Sakura.App.Commands
 
   public class CreatePostHandler : ICommandHandler<CreatePost, long>
   {
-    protected readonly Context Context;
-    protected readonly PostRepository Repository;
+    protected readonly IPostRepository Repository;
 
-    public CreatePostHandler(Context context, PostRepository repository)
+    public CreatePostHandler(IPostRepository repository)
     {
-      Context = context;
       Repository = repository;
     }
 

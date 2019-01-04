@@ -32,7 +32,7 @@ namespace Sakura.Api
       IMapper mapper = mappingConfig.CreateMapper();
       services.AddSingleton(mapper);
 
-      services.AddScoped<PostRepository>();
+      services.AddScoped<IPostRepository, PostRepository>();
 
       services.AddScoped<ICommandDispatcher, CommandDispatcher>();
       services.AddScoped<IQueryDispatcher, QueryDispatcher>();
