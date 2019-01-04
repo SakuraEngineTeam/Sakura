@@ -6,4 +6,9 @@ namespace Sakura.App.Queries
   {
     TResult Handle(TQuery query);
   }
+
+  public interface IQueryDispatcher
+  {
+    TQueryResult Handle<TQuery, TQueryResult>(TQuery query) where TQuery : IQuery<TQueryResult>;
+  }
 }

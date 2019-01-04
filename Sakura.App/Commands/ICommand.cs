@@ -6,4 +6,9 @@ namespace Sakura.App.Commands
   {
     TResult Handle(TCommand command);
   }
+
+  public interface ICommandDispatcher
+  {
+    TCommandResult Handle<TCommand, TCommandResult>(TCommand command) where TCommand : ICommand<TCommandResult>;
+  }
 }

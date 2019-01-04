@@ -1,4 +1,3 @@
-using System.Data;
 using Dapper;
 using Sakura.Persistence;
 
@@ -16,22 +15,28 @@ namespace Sakura.App.Queries
 
   public class GetPostHandler : IQueryHandler<GetPost, PostViewModel>
   {
-    protected readonly IDbConnection Connection;
+    protected readonly IConnectionFactory ConnectionFactory;
 
-    public GetPostHandler(IDbConnection connection)
+    public GetPostHandler(IConnectionFactory connectionFactory)
     {
-      Connection = connection;
+      ConnectionFactory = connectionFactory;
     }
 
     public PostViewModel Handle(GetPost query)
     {
-      string sql = "SELECT post_id as id, message, created_at as createdAt FROM posts WHERE post_id = @Id";
-      var resource = Connection.QueryFirstOrDefault<PostViewModel>(sql, new { query.Id });
-      if (resource == null) {
-        throw new ModelNotFoundException();
-      }
+      try {
+        var connection = ConnectionFactory.GetConnection();
+        string sql = "SELECT post_id as id, message, created_at as createdAt FROM posts WHERE post_id = @Id";
+        var resource = connection.QueryFirstOrDefault<PostViewModel>(sql, new {query.Id});
+        if (resource == null) {
+          throw new ModelNotFoundException();
+        }
 
-      return resource;
+        return resource;
+      }
+      finally {
+        ConnectionFactory.CloseConnection();
+      }
     }
   }
 }

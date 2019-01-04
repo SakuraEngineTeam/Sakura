@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Data;
 using Dapper;
 
 namespace Sakura.App.Queries
@@ -8,16 +7,23 @@ namespace Sakura.App.Queries
 
   public class GetPostsHandler : IQueryHandler<GetPosts, IEnumerable<PostViewModel>>
   {
-    protected readonly IDbConnection Connection;
+    protected readonly IConnectionFactory ConnectionFactory;
 
-    public GetPostsHandler(IDbConnection connection)
+    public GetPostsHandler(IConnectionFactory connectionFactory)
     {
-      Connection = connection;
+      ConnectionFactory = connectionFactory;
     }
 
     public IEnumerable<PostViewModel> Handle(GetPosts query)
     {
-      return Connection.Query<PostViewModel>("SELECT post_id as id, message, created_at as createdAt FROM posts");
+      try {
+        var connection = ConnectionFactory.GetConnection();
+        string sql = "SELECT post_id as id, message, created_at as createdAt FROM posts";
+        return connection.Query<PostViewModel>(sql);
+      }
+      finally {
+        ConnectionFactory.CloseConnection();
+      }
     }
   }
 }

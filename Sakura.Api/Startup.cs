@@ -1,11 +1,13 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Npgsql;
+using Sakura.App;
+using Sakura.App.Commands;
+using Sakura.App.Queries;
 using Sakura.Persistence;
 
 namespace Sakura.Api
@@ -21,14 +23,9 @@ namespace Sakura.Api
 
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddTransient<IConnectionFactory, ConnectionFactory>();
+
       string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-      services.AddTransient<IDbConnection>(provider => {
-        var connection = new NpgsqlConnection(connectionString);
-        connection.Open();
-        return connection;
-      });
-
       services.AddDbContext<Context>(options => options.UseNpgsql(connectionString));
 
       var mappingConfig = new MapperConfiguration(mc => mc.AddProfile(new MappingProfile()));
@@ -36,6 +33,13 @@ namespace Sakura.Api
       services.AddSingleton(mapper);
 
       services.AddScoped<PostRepository>();
+
+      services.AddScoped<ICommandDispatcher, CommandDispatcher>();
+      services.AddScoped<IQueryDispatcher, QueryDispatcher>();
+
+      services.AddScoped<ICommandHandler<CreatePost, long>, CreatePostHandler>();
+      services.AddScoped<IQueryHandler<GetPosts, IEnumerable<PostViewModel>>, GetPostsHandler>();
+      services.AddScoped<IQueryHandler<GetPost, PostViewModel>, GetPostHandler>();
 
       services.AddMvcCore().AddJsonFormatters();
     }
