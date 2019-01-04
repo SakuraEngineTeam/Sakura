@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Sakura.App.Commands;
 using Sakura.App.Queries;
+using Sakura.Model;
 using Sakura.Persistence;
 
 namespace Sakura.Api.Controllers
@@ -22,8 +23,13 @@ namespace Sakura.Api.Controllers
     [HttpPost]
     public ActionResult CreatePost([FromBody] CreatePost command)
     {
-      long id = CommandDispatcher.Handle<CreatePost, long>(command);
-      return Created($"api/posts/{id}", new {id});
+      try {
+        long id = CommandDispatcher.Handle<CreatePost, long>(command);
+        return Created($"api/posts/{id}", new {id});
+      }
+      catch (ValidationException e) {
+        return BadRequest(new {error = e.Message});
+      }
     }
 
     [HttpGet]
