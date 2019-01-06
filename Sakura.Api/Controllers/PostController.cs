@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Sakura.App.Commands;
@@ -24,7 +25,7 @@ namespace Sakura.Api.Controllers
     public ActionResult CreatePost([FromBody] CreatePost command)
     {
       try {
-        long id = CommandDispatcher.Handle<CreatePost, long>(command);
+        Guid id = CommandDispatcher.Handle<CreatePost, Guid>(command);
         return Created($"api/posts/{id}", new {id});
       }
       catch (ValidationException e) {
@@ -40,7 +41,7 @@ namespace Sakura.Api.Controllers
     }
 
     [HttpGet("{id}")]
-    public ActionResult<PostViewModel> GetPost(long id)
+    public ActionResult<PostViewModel> GetPost(Guid id)
     {
       try {
         var query = new GetPost(id);

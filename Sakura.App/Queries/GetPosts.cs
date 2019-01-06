@@ -18,7 +18,7 @@ namespace Sakura.App.Queries
     {
       try {
         var connection = ConnectionFactory.GetConnection();
-        string sql = "SELECT post_id as id, message, created_at as createdAt FROM posts";
+        string sql = "SELECT post_id as id, view_id as viewId, message, created_at as createdAt FROM posts";
         return connection.Query<PostViewModel>(sql);
       }
       finally {

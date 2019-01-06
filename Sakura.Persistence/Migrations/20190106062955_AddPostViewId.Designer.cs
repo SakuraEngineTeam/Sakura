@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Sakura.Persistence;
@@ -9,9 +10,10 @@ using Sakura.Persistence;
 namespace Sakura.Persistence.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20190106062955_AddPostViewId")]
+    partial class AddPostViewId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,10 +23,9 @@ namespace Sakura.Persistence.Migrations
 
             modelBuilder.Entity("Sakura.Persistence.PostResource", b =>
                 {
-                    b.Property<Guid>("PostId")
+                    b.Property<long>("PostId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("post_id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
+                        .HasColumnName("post_id");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnName("created_at");

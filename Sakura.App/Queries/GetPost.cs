@@ -1,3 +1,4 @@
+using System;
 using Dapper;
 using Sakura.Persistence;
 
@@ -5,9 +6,9 @@ namespace Sakura.App.Queries
 {
   public class GetPost : IQuery<PostViewModel>
   {
-    public readonly long Id;
+    public readonly Guid Id;
 
-    public GetPost(long id)
+    public GetPost(Guid id)
     {
       Id = id;
     }
@@ -26,7 +27,10 @@ namespace Sakura.App.Queries
     {
       try {
         var connection = ConnectionFactory.GetConnection();
-        string sql = "SELECT post_id as id, message, created_at as createdAt FROM posts WHERE post_id = @Id";
+        string sql = @"SELECT post_id as id, view_id as viewId, message, created_at as createdAt
+FROM posts
+WHERE post_id = @Id
+LIMIT 1";
         var resource = connection.QueryFirstOrDefault<PostViewModel>(sql, new {query.Id});
         if (resource == null) {
           throw new ModelNotFoundException();

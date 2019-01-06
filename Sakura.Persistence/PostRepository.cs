@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AutoMapper;
 using Sakura.Model;
 
@@ -12,7 +13,7 @@ namespace Sakura.Persistence
     TKey Save(TModel item);
   }
 
-  public interface IPostRepository : IRepository<long, Post> { }
+  public interface IPostRepository : IRepository<Guid, Post> { }
 
   public class PostRepository : IPostRepository
   {
@@ -25,7 +26,7 @@ namespace Sakura.Persistence
       Mapper = mapper;
     }
 
-    public Post Get(long key)
+    public Post Get(Guid key)
     {
       var resource = Context.Posts.SingleOrDefault(p => p.PostId == key);
       if (resource == null) {
@@ -35,7 +36,7 @@ namespace Sakura.Persistence
       return Mapper.Map<Post>(resource);
     }
 
-    public long Save(Post item)
+    public Guid Save(Post item)
     {
       var resource = Mapper.Map<PostResource>(item);
       Context.Posts.Update(resource);

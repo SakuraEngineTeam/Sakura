@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +38,7 @@ namespace Sakura.Api
       services.AddScoped<ICommandDispatcher, CommandDispatcher>();
       services.AddScoped<IQueryDispatcher, QueryDispatcher>();
 
-      services.AddScoped<ICommandHandler<CreatePost, long>, CreatePostHandler>();
+      services.AddScoped<ICommandHandler<CreatePost, Guid>, CreatePostHandler>();
       services.AddScoped<IQueryHandler<GetPosts, IEnumerable<PostViewModel>>, GetPostsHandler>();
       services.AddScoped<IQueryHandler<GetPost, PostViewModel>, GetPostHandler>();
 

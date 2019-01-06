@@ -11,8 +11,9 @@ namespace Sakura.App.Tests
     [Fact]
     public void Handle_ValidCommand_ShouldSavePost()
     {
+      var contextMock = new Mock<Context>();
       var repositoryMock = new Mock<IPostRepository>();
-      var handler = new CreatePostHandler(repositoryMock.Object);
+      var handler = new CreatePostHandler(contextMock.Object, repositoryMock.Object);
       var command = new CreatePost("Howdy");
 
       handler.Handle(command);
@@ -23,8 +24,9 @@ namespace Sakura.App.Tests
     [Fact]
     public void Handle_EmptyMessage_ShouldThrowValidationException()
     {
+      var contextMock = new Mock<Context>();
       var repositoryMock = new Mock<IPostRepository>();
-      var handler = new CreatePostHandler(repositoryMock.Object);
+      var handler = new CreatePostHandler(contextMock.Object, repositoryMock.Object);
       var command = new CreatePost("");
 
       Assert.Throws<ValidationException>(() => handler.Handle(command));

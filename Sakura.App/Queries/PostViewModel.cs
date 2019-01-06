@@ -4,13 +4,15 @@ namespace Sakura.App.Queries
 {
   public class PostViewModel
   {
-    public readonly long Id;
+    public readonly Guid Id;
+    public readonly long ViewId;
     public readonly string Message;
     public readonly DateTime CreatedAt;
 
-    public PostViewModel(long id, string message, DateTime createdAt)
+    public PostViewModel(Guid id, long viewId, string message, DateTime createdAt)
     {
       Id = id;
+      ViewId = viewId;
       Message = message;
       CreatedAt = createdAt;
     }

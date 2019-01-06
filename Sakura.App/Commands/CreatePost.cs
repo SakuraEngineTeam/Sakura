@@ -1,9 +1,11 @@
+using System;
+using System.Linq;
 using Sakura.Model;
 using Sakura.Persistence;
 
 namespace Sakura.App.Commands
 {
-  public class CreatePost : ICommand<long>
+  public class CreatePost : ICommand<Guid>
   {
     public readonly string Message;
 
@@ -13,18 +15,21 @@ namespace Sakura.App.Commands
     }
   }
 
-  public class CreatePostHandler : ICommandHandler<CreatePost, long>
+  public class CreatePostHandler : ICommandHandler<CreatePost, Guid>
   {
+    protected readonly Context Context;
     protected readonly IPostRepository Repository;
 
-    public CreatePostHandler(IPostRepository repository)
+    public CreatePostHandler(Context context, IPostRepository repository)
     {
+      Context = context;
       Repository = repository;
     }
 
-    public long Handle(CreatePost command)
+    public Guid Handle(CreatePost command)
     {
-      var post = new Post(command.Message);
+      long viewId = Context.Posts.Max(p => p.ViewId) + 1;
+      var post = new Post(viewId, command.Message);
       return Repository.Save(post);
     }
   }

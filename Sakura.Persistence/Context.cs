@@ -23,6 +23,9 @@ namespace Sakura.Persistence
     {
       base.OnModelCreating(builder);
 
+      builder.Entity<PostResource>().Property(p => p.PostId).HasDefaultValueSql("uuid_generate_v4()");
+      builder.Entity<PostResource>().HasIndex(p => p.ViewId).IsUnique();
+
       foreach (var entity in builder.Model.GetEntityTypes()) {
         entity.Relational().TableName = ToSnakeCase(entity.Relational().TableName);
 
