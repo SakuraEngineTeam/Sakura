@@ -59,7 +59,10 @@ namespace Sakura.Api
       }
 
       app.UseStaticFiles();
-      app.UseMvc();
+      app.UseMvc(routes =>
+      {
+        routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Spa", action = "Index" });
+      });
     }
   }
 }
