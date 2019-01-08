@@ -10,6 +10,8 @@ namespace Sakura.App.Queries
     public readonly string Message;
     public readonly DateTime CreatedAt;
 
+    protected PostViewModel() { }
+
     public PostViewModel(
       Guid threadId,
       Guid id,

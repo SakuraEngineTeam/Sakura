@@ -43,6 +43,7 @@ namespace Sakura.Api
       services.AddScoped<ICommandHandler<CreateThread, Guid>, CreateThreadHandler>();
       services.AddScoped<ICommandHandler<CreatePost, Guid>, CreatePostHandler>();
 
+      services.AddScoped<IQueryHandler<GetThreadPreviews, IEnumerable<ThreadPreviewViewModel>>, GetThreadPreviewsHandler>();
       services.AddScoped<IQueryHandler<GetThreads, IEnumerable<ThreadViewModel>>, GetThreadsHandler>();
       services.AddScoped<IQueryHandler<GetThread, ThreadViewModel>, GetThreadHandler>();
       services.AddScoped<IQueryHandler<GetPosts, IEnumerable<PostViewModel>>, GetPostsHandler>();
