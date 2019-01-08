@@ -13,7 +13,10 @@ namespace Sakura.Persistence
     TKey Save(TModel item);
   }
 
-  public interface IPostRepository : IRepository<Guid, Post> { }
+  public interface IPostRepository : IRepository<Guid, Post>
+  {
+    Post GetLastOrDefault();
+  }
 
   public class PostRepository : IPostRepository
   {
@@ -34,6 +37,12 @@ namespace Sakura.Persistence
       }
 
       return Mapper.Map<Post>(resource);
+    }
+
+    public Post GetLastOrDefault()
+    {
+      var resource = Context.Posts.OrderByDescending(p => p.PostId).FirstOrDefault();
+      return resource != null ? Mapper.Map<Post>(resource) : null;
     }
 
     public Guid Save(Post item)

@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Sakura.Model;
 using Sakura.Persistence;
 
@@ -17,18 +16,17 @@ namespace Sakura.App.Commands
 
   public class CreatePostHandler : ICommandHandler<CreatePost, Guid>
   {
-    protected readonly Context Context;
     protected readonly IPostRepository Repository;
 
-    public CreatePostHandler(Context context, IPostRepository repository)
+    public CreatePostHandler(IPostRepository repository)
     {
-      Context = context;
       Repository = repository;
     }
 
     public Guid Handle(CreatePost command)
     {
-      long viewId = Context.Posts.Max(p => p.ViewId) + 1;
+      Post last = Repository.GetLastOrDefault();
+      long viewId = last != null ? Repository.GetLastOrDefault().ViewId + 1 : 1;
       var post = new Post(viewId, command.Message);
       return Repository.Save(post);
     }
