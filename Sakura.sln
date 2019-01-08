@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.Persistence", "Sakur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.Model", "Sakura.Model\Sakura.Model.csproj", "{D04E7E7E-7B66-4D0D-9ECE-2771A11A1AD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.App", "Sakura.App\Sakura.App.csproj", "{913F436E-105F-4BEB-8849-9C2C797181C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.App.Queries", "Sakura.App.Queries\Sakura.App.Queries.csproj", "{913F436E-105F-4BEB-8849-9C2C797181C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.App.Tests", "Sakura.App.Tests\Sakura.App.Tests.csproj", "{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.App.Commands", "Sakura.App.Commands\Sakura.App.Commands.csproj", "{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,5 +88,17 @@ Global
 		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Release|x64.Build.0 = Release|Any CPU
 		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Release|x86.ActiveCfg = Release|Any CPU
 		{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}.Release|x86.Build.0 = Release|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Debug|x64.Build.0 = Debug|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Debug|x86.Build.0 = Debug|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Release|x64.ActiveCfg = Release|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Release|x64.Build.0 = Release|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Release|x86.ActiveCfg = Release|Any CPU
+		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sakura.App\Sakura.App.csproj" />
+    <ProjectReference Include="..\Sakura.App.Commands\Sakura.App.Commands.csproj" />
+    <ProjectReference Include="..\Sakura.App.Queries\Sakura.App.Queries.csproj" />
     <ProjectReference Include="..\Sakura.Model\Sakura.Model.csproj" />
     <ProjectReference Include="..\Sakura.Persistence\Sakura.Persistence.csproj" />
   </ItemGroup>
