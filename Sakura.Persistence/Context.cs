@@ -5,6 +5,7 @@ namespace Sakura.Persistence
 {
   public class Context : DbContext
   {
+    public DbSet<ThreadResource> Threads { get; set; }
     public DbSet<PostResource> Posts { get; set; }
 
     public Context(DbContextOptions options) : base(options) { }
@@ -23,6 +24,7 @@ namespace Sakura.Persistence
     {
       base.OnModelCreating(builder);
 
+      builder.Entity<ThreadResource>().Property(t => t.ThreadId).HasDefaultValueSql("uuid_generate_v4()");
       builder.Entity<PostResource>().Property(p => p.PostId).HasDefaultValueSql("uuid_generate_v4()");
       builder.Entity<PostResource>().HasIndex(p => p.ViewId).IsUnique();
 

@@ -8,17 +8,28 @@ namespace Sakura.Model
     public string Message { get; protected set; }
     public DateTime CreatedAt { get; protected set; }
 
+    public Thread Thread { get; protected set; }
+
     protected Post() { }
 
-    public Post(long viewId, string message) : this()
+    public Post(
+      IPostRepository repository,
+      Thread thread,
+      string message)
     {
+      if (thread == null) {
+        throw new ValidationException("Post should have parent thread");
+      }
+
       if (string.IsNullOrWhiteSpace(message)) {
         throw new ValidationException("Post message should not be empty");
       }
 
-      ViewId = viewId;
+      Post lastPost = repository.GetLastOrDefault();
+      ViewId = (lastPost?.ViewId ?? 0) + 1;
       Message = message;
       CreatedAt = DateTime.Now;
+      Thread = thread;
     }
   }
 }

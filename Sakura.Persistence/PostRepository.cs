@@ -1,23 +1,11 @@
 ﻿using System;
 using System.Linq;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Sakura.Model;
 
 namespace Sakura.Persistence
 {
-  public interface IRepository<TKey, TModel>
-    where TKey : struct
-    where TModel : IModel<TKey>
-  {
-    TModel Get(TKey key);
-    TKey Save(TModel item);
-  }
-
-  public interface IPostRepository : IRepository<Guid, Post>
-  {
-    Post GetLastOrDefault();
-  }
-
   public class PostRepository : IPostRepository
   {
     protected readonly Context Context;
@@ -31,7 +19,7 @@ namespace Sakura.Persistence
 
     public Post Get(Guid key)
     {
-      var resource = Context.Posts.SingleOrDefault(p => p.PostId == key);
+      var resource = Context.Posts.AsNoTracking().SingleOrDefault(p => p.PostId == key);
       if (resource == null) {
         throw new ModelNotFoundException();
       }
@@ -41,7 +29,7 @@ namespace Sakura.Persistence
 
     public Post GetLastOrDefault()
     {
-      var resource = Context.Posts.OrderByDescending(p => p.PostId).FirstOrDefault();
+      var resource = Context.Posts.OrderByDescending(p => p.ViewId).FirstOrDefault();
       return resource != null ? Mapper.Map<Post>(resource) : null;
     }
 

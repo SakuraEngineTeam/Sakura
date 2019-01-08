@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sakura.Persistence
 {
+  [Table("posts")]
   public class PostResource
   {
     [Key]
@@ -15,5 +16,10 @@ namespace Sakura.Persistence
     [Required] public string Message { get; set; }
 
     public DateTime CreatedAt { get; set; }
+
+    public Guid ThreadId { get; set; }
+
+    [ForeignKey("ThreadId")]
+    public ThreadResource Thread { get; set; }
   }
 }

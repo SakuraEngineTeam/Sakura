@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Sakura.App.Commands;
 using Sakura.App.Queries;
-using Sakura.Model;
 using Sakura.Persistence;
 
 namespace Sakura.Api.Controllers
@@ -12,25 +10,11 @@ namespace Sakura.Api.Controllers
   [Route("api/posts")]
   public class PostController : ControllerBase
   {
-    protected readonly ICommandDispatcher CommandDispatcher;
     protected readonly IQueryDispatcher QueryDispatcher;
 
-    public PostController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
+    public PostController(IQueryDispatcher queryDispatcher)
     {
-      CommandDispatcher = commandDispatcher;
       QueryDispatcher = queryDispatcher;
-    }
-
-    [HttpPost]
-    public ActionResult CreatePost([FromBody] CreatePost command)
-    {
-      try {
-        Guid id = CommandDispatcher.Handle<CreatePost, Guid>(command);
-        return Created($"api/posts/{id}", new {id});
-      }
-      catch (ValidationException e) {
-        return BadRequest(new {error = e.Message});
-      }
     }
 
     [HttpGet]

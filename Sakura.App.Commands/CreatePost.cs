@@ -1,34 +1,39 @@
 using System;
 using Sakura.Model;
-using Sakura.Persistence;
 
 namespace Sakura.App.Commands
 {
   public class CreatePost : ICommand<Guid>
   {
+    public readonly Guid ThreadId;
     public readonly string Message;
 
-    public CreatePost(string message)
+    public CreatePost(Guid threadId, string message)
     {
+      ThreadId = threadId;
       Message = message;
     }
   }
 
   public class CreatePostHandler : ICommandHandler<CreatePost, Guid>
   {
-    protected readonly IPostRepository Repository;
+    protected readonly IThreadRepository ThreadRepository;
+    protected readonly IPostRepository PostRepository;
 
-    public CreatePostHandler(IPostRepository repository)
+    public CreatePostHandler(
+      IThreadRepository threadRepository,
+      IPostRepository postRepository)
     {
-      Repository = repository;
+      ThreadRepository = threadRepository;
+      PostRepository = postRepository;
     }
 
     public Guid Handle(CreatePost command)
     {
-      Post last = Repository.GetLastOrDefault();
-      long viewId = last != null ? Repository.GetLastOrDefault().ViewId + 1 : 1;
-      var post = new Post(viewId, command.Message);
-      return Repository.Save(post);
+      Thread thread = ThreadRepository.Get(command.ThreadId);
+      thread.CreatePost(PostRepository, command.Message);
+      ThreadRepository.Save(thread);
+      return PostRepository.GetLastOrDefault()?.Id ?? Guid.Empty;
     }
   }
 }

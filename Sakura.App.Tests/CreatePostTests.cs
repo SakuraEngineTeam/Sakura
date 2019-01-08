@@ -1,7 +1,7 @@
+using System;
 using Moq;
 using Sakura.App.Commands;
 using Sakura.Model;
-using Sakura.Persistence;
 using Xunit;
 
 namespace Sakura.App.Tests
@@ -11,21 +11,30 @@ namespace Sakura.App.Tests
     [Fact]
     public void Handle_ValidCommand_ShouldSavePost()
     {
-      var repositoryMock = new Mock<IPostRepository>();
-      var handler = new CreatePostHandler(repositoryMock.Object);
-      var command = new CreatePost("Howdy");
+      var postRepositoryMock = new Mock<IPostRepository>();
+      var threadRepositoryMock = new Mock<IThreadRepository>();
+      threadRepositoryMock.Setup(repo => repo.Get(It.IsAny<Guid>()))
+        .Returns(new Thread(postRepositoryMock.Object, "Test"));
+
+      var handler = new CreatePostHandler(threadRepositoryMock.Object, postRepositoryMock.Object);
+      var command = new CreatePost(Guid.Empty, "Howdy");
 
       handler.Handle(command);
 
-      repositoryMock.Verify(repository => repository.Save(It.IsAny<Post>()));
+      threadRepositoryMock.Verify(repository => repository.Save(It.IsAny<Thread>()));
     }
 
     [Fact]
     public void Handle_EmptyMessage_ShouldThrowValidationException()
     {
-      var repositoryMock = new Mock<IPostRepository>();
-      var handler = new CreatePostHandler(repositoryMock.Object);
-      var command = new CreatePost("");
+      var postRepositoryMock = new Mock<IPostRepository>();
+
+      var threadRepositoryMock = new Mock<IThreadRepository>();
+      threadRepositoryMock.Setup(repo => repo.Get(It.IsAny<Guid>()))
+        .Returns(new Thread(postRepositoryMock.Object, "Test"));
+
+      var handler = new CreatePostHandler(threadRepositoryMock.Object, postRepositoryMock.Object);
+      var command = new CreatePost(Guid.Empty, "");
 
       Assert.Throws<ValidationException>(() => handler.Handle(command));
     }
