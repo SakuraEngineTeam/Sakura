@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -57,12 +57,13 @@ namespace Sakura.Api
       if (env.IsDevelopment()) {
         app.UseDeveloperExceptionPage();
       }
+      else
+      {
+        app.UseStatusCodePagesWithReExecute("/api/errors/{0}");
+      }
 
       app.UseStaticFiles();
-      app.UseMvc(routes =>
-      {
-        routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Spa", action = "Index" });
-      });
+      app.UseMvc();
     }
   }
 }
