@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -50,6 +52,7 @@ namespace Sakura.Api
       services.AddScoped<IQueryHandler<GetPost, PostViewModel>, GetPostHandler>();
 
       services.AddMvcCore().AddJsonFormatters();
+      services.AddCors();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -62,8 +65,19 @@ namespace Sakura.Api
         app.UseStatusCodePagesWithReExecute("/api/errors/{0}");
       }
 
+      app.UseCors(builder => builder.AllowAnyOrigin());
       app.UseStaticFiles();
       app.UseMvc();
+
+      app.UseSpa(spa =>
+      {
+        spa.Options.SourcePath = "ClientApp";
+
+        if (env.IsDevelopment())
+        {
+          spa.UseAngularCliServer(npmScript: "dev");
+        }
+      });
     }
   }
 }
