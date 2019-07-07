@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +37,14 @@ namespace Sakura.Api
       IMapper mapper = mappingConfig.CreateMapper();
       services.AddSingleton(mapper);
 
+      AddScoped(services);
+
+      services.AddMvcCore().AddJsonFormatters();
+      services.AddCors();
+    }
+
+    private void AddScoped(IServiceCollection services)
+    {
       services.AddScoped<IThreadRepository, ThreadRepository>();
       services.AddScoped<IPostRepository, PostRepository>();
 
@@ -50,34 +59,32 @@ namespace Sakura.Api
       services.AddScoped<IQueryHandler<GetThread, ThreadViewModel>, GetThreadHandler>();
       services.AddScoped<IQueryHandler<GetPosts, IEnumerable<PostViewModel>>, GetPostsHandler>();
       services.AddScoped<IQueryHandler<GetPost, PostViewModel>, GetPostHandler>();
-
-      services.AddMvcCore().AddJsonFormatters();
-      services.AddCors();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
       if (env.IsDevelopment()) {
         app.UseDeveloperExceptionPage();
+
+        app.UseSpa(spa =>
+        {
+          spa.Options.SourcePath = "../ClientApp";
+          spa.UseAngularCliServer(npmScript: "dev");
+        });
       }
       else
       {
         app.UseStatusCodePagesWithReExecute("/api/errors/{0}");
       }
 
-      app.UseCors(builder => builder.AllowAnyOrigin());
+      app.UseCors(builder => {
+          builder.AllowAnyMethod();
+          builder.SetIsOriginAllowed(s => true);
+          builder.AllowAnyHeader();
+        }
+      );
       app.UseStaticFiles();
       app.UseMvc();
-
-      app.UseSpa(spa =>
-      {
-        spa.Options.SourcePath = "../ClientApp";
-
-        if (env.IsDevelopment())
-        {
-          spa.UseAngularCliServer(npmScript: "dev");
-        }
-      });
     }
   }
 }
