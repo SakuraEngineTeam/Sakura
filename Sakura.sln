@@ -1,19 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.Api", "Sakura.Api\Sakura.Api.csproj", "{5ECC7E53-0D0E-4C9D-8342-E9124D93A4E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sakura.Api", "Sakura.Api\Sakura.Api.csproj", "{5ECC7E53-0D0E-4C9D-8342-E9124D93A4E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.Persistence", "Sakura.Persistence\Sakura.Persistence.csproj", "{16C9FCC1-A051-44D8-BDEF-97B2872A86F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sakura.Persistence", "Sakura.Persistence\Sakura.Persistence.csproj", "{16C9FCC1-A051-44D8-BDEF-97B2872A86F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.Model", "Sakura.Model\Sakura.Model.csproj", "{D04E7E7E-7B66-4D0D-9ECE-2771A11A1AD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sakura.Model", "Sakura.Model\Sakura.Model.csproj", "{D04E7E7E-7B66-4D0D-9ECE-2771A11A1AD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.App.Queries", "Sakura.App.Queries\Sakura.App.Queries.csproj", "{913F436E-105F-4BEB-8849-9C2C797181C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sakura.App.Queries", "Sakura.App.Queries\Sakura.App.Queries.csproj", "{913F436E-105F-4BEB-8849-9C2C797181C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.App.Tests", "Sakura.App.Tests\Sakura.App.Tests.csproj", "{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sakura.App.Tests", "Sakura.App.Tests\Sakura.App.Tests.csproj", "{CEAB08C3-F046-4E67-913E-CA18F0A0E8BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.App.Commands", "Sakura.App.Commands\Sakura.App.Commands.csproj", "{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sakura.App.Commands", "Sakura.App.Commands\Sakura.App.Commands.csproj", "{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientApp", "ClientApp", "{E4263710-F030-4B77-B564-4706E951D4FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,9 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5ECC7E53-0D0E-4C9D-8342-E9124D93A4E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -100,5 +99,11 @@ Global
 		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Release|x64.Build.0 = Release|Any CPU
 		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Release|x86.ActiveCfg = Release|Any CPU
 		{513372F7-1F04-44AE-B49F-A43AEFF7AD9F}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {955FCD5E-53E6-4F50-8F85-3A373454ADA3}
 	EndGlobalSection
 EndGlobal
