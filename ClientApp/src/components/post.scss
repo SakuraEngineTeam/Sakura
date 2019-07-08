@@ -12,12 +12,22 @@
   @include clearfix;
 
   &__header {
+    display: flex;
+    justify-content: space-between;
     border-bottom: $block-header-border;
 
     font-size: 1.1em;
     font-weight: 300;
 
     padding: $block-header-padding;
+
+    .left {
+      margin-left: 0;
+    }
+
+    .right {
+      margin-right: 0;
+    }
   }
 
   &__content {
@@ -26,5 +36,9 @@
 
   &__message {
     white-space: pre-line;
+  }
+
+  &__answer {
+    font-size: 1em;
   }
 }

@@ -1,8 +1,13 @@
 <template>
   <section class="post">
     <div class="post__header">
-      <span class="post__date">{{ date }}</span>
-      <span class="post__id">№{{ post.viewId }}</span>
+      <div class="left">
+        <span class="post__date">{{ date }}</span>
+        <span class="post__id">№{{ post.viewId }}</span>
+      </div>
+      <div class="right">
+        <a class="link" href="#">Reply</a>
+      </div>
     </div>
 
     <div class="post__content">
