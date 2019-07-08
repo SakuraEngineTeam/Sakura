@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -63,13 +64,17 @@ namespace Sakura.Api
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
+      app.UseStaticFiles();
+      app.UseMvc();
+
       if (env.IsDevelopment()) {
         app.UseDeveloperExceptionPage();
 
         app.UseSpa(spa =>
         {
           spa.Options.SourcePath = "../ClientApp";
-          spa.UseAngularCliServer(npmScript: "dev");
+
+          spa.UseReactDevelopmentServer(npmScript: "dev");
         });
       }
       else
@@ -83,8 +88,6 @@ namespace Sakura.Api
           builder.AllowAnyHeader();
         }
       );
-      app.UseStaticFiles();
-      app.UseMvc();
     }
   }
 }

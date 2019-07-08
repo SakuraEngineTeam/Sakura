@@ -44,5 +44,11 @@ module.exports = {
   externals: {
     'vue': "Vue",
     'vue-router': "VueRouter"
+  },
+  devServer: {
+    after: function(app, server) {
+      console.log("Starting the development server...");
+    },
+    port: process.env.PORT
   }
 };
